@@ -14,7 +14,7 @@ class WikiStylesController < ApplicationController
       @style.destroy
     # try to save the style if we have some text
     elsif !@style.text.blank? && !@style.save
-      #TODO: Changes are not echoed back to the user currently
+      # TODO: Changes are not echoed back to the user currently
       flash.now[:error] = "Error saving CSS"
     end
 
