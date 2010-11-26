@@ -9,9 +9,21 @@ class WikiStylesController < ApplicationController
     @style.attributes = params[:style]
     @style.author = User.current
     
-    if @style.save
-      redirect_to :controller => :wiki, :action => 'show', :project_id => @project, :id => @page ? @page.title : nil
+    # delete the style record by setting :text to ""
+    if @style.text.blank? && !@style.new_record?
+      @style.destroy
+    # try to save the style if we have some text
+    elsif !@style.text.blank? && !@style.save
+      #TODO: Changes are not echoed back to the user currently
+      flash.now[:error] = "Error saving CSS"
     end
+
+    if params[:continue]
+      redirect = {:action => 'edit', :tab => (params[:id] ? :styles : :styles_global)}
+    else
+      redirect = {:action => 'show'}
+    end
+    redirect_to redirect.merge({:controller => :wiki, :project_id => @project, :id => @page ? @page.title : @wiki.start_page})
   end
 
 private
@@ -27,9 +39,9 @@ private
     if params[:id]
       @page = @wiki.find_page(params[:id])
       return render_404 unless @page
-      @style = @page.style || @page.style.build(:wiki => @wiki)
+      @style = @page.style || WikiStyle.new(:wiki => @wiki, :page => @page)
     else
-      @style = @wiki.style || @wiki.build
+      @style = @wiki.style || WikiStyle.new(:wiki => @wiki)
     end
   end
 end  

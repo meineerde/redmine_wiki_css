@@ -1,0 +1,9 @@
+<h2><%=h @page.pretty_title %></h2>
+
+<%= render_tabs wiki_edit_tabs %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'scm' %>
+<% end %>
+
+<% html_title @page.pretty_title %>

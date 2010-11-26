@@ -6,6 +6,7 @@ Dispatcher.to_prepare do
   require_dependency 'wiki_css/wiki_patch'
   require_dependency 'wiki_css/wiki_page_patch'
   
+  require_dependency 'wiki_css/wiki_helper_patch'
   require_dependency 'wiki_css/wiki_controller_patch'
 end
 

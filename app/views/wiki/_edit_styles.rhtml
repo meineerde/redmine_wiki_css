@@ -1,0 +1,21 @@
+<% if !tab[:global] && @page.new_record? %>
+<p>><%=l(:text_need_to_save_wiki_page) %></p>
+<% else%>
+<% if User.current.allowed_to?(:edit_wiki_styles, @project) %>
+<% form_for :style, tab[:global] ? @style_global : @style, :url => {:controller => 'wiki_styles', :action => 'update', :project_id => @project, :id => tab[:global] ? nil: @page.title}, :html => {:method => :put} do |f| %>
+<%= error_messages_for 'style' %>
+
+<p><%= f.text_area :text, :cols => 100, :rows => 25, :class => 'wiki-edit', :accesskey => accesskey(:edit) %></p>
+<p>
+  <%= submit_tag l(:button_save) %>
+  <%= submit_tag l(:button_save_and_continue), :name => 'continue' %>
+</p>
+<% end %>
+<% else %>
+
+
+<pre><code class="css">
+  <%=h tab[:global] ? @style : @style_global %>
+</code></pre>
+<% end %>
+<% end %>

@@ -8,22 +8,39 @@ module WikiCss
       base.class_eval do
         unloadable
       
+        helper :wiki
+        
         alias_method_chain :show, :css
+        alias_method_chain :edit, :css
       end
     end
     
     module InstanceMethods
       def show_with_css
-        return show_without_css unless params[:format] == "css"
-        
-        if params[:id].blank?
-          style = @wiki.style
+        if params[:format] == "css"
+          if params[:id].blank?
+            style = @wiki.style
+          else
+            page = @wiki.find_page(params[:id])
+            style = page.style if page
+          end
+          style ? render(:text => style.text, :content_type => 'text/css') : render_404
         else
-          page = @wiki.find_page(params[:id])
-          style = page.style if page
+          show_without_css
+          find_style
         end
-        style ? render(:text => style.text, :content_type => 'text/css') : render_404
       end
+      
+      def edit_with_css
+        edit_without_css
+        find_style
+      end
+
+    private          
+      def find_style
+        @style = @page.style || WikiStyle.new(:wiki => @wiki, :page => @page)
+        @style_global = @wiki.style || WikiStyle.new(:wiki => @wiki)
+      end      
     end
   end
 end

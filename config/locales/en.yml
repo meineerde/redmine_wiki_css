@@ -1,0 +1,7 @@
+en:
+  label_wiki_styles: "Styles"
+  label_wiki_styles_global: "Global styles"
+  
+  button_save_and_continue: "Save and Continue"
+  
+  text_need_to_save_wiki_page: 'You need to save the <a href="#">Wiki Page</a> before you can edit the styles.'
