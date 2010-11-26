@@ -1,5 +1,5 @@
 <% if !tab[:global] && @page.new_record? %>
-<p>><%=l(:text_need_to_save_wiki_page) %></p>
+<p><%=l(:text_need_to_save_wiki_page) %></p>
 <% else%>
 <% if User.current.allowed_to?(:edit_wiki_styles, @project) %>
 <% form_for :style, tab[:global] ? @style_global : @style, :url => {:controller => 'wiki_styles', :action => 'update', :project_id => @project, :id => tab[:global] ? nil: @page.title}, :html => {:method => :put} do |f| %>
@@ -12,10 +12,8 @@
 </p>
 <% end %>
 <% else %>
-
-
-<pre><code class="css">
-  <%=h tab[:global] ? @style : @style_global %>
-</code></pre>
+<div class="wiki">
+<%= textilizable("<pre><code class=\"css\">#{tab[:global] ? @style.text : @style_global.text}</code></pre>")%>
+</div>
 <% end %>
 <% end %>
