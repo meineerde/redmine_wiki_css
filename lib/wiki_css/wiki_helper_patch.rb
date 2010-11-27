@@ -13,8 +13,8 @@ module WikiCss
     module InstanceMethods
       def wiki_edit_tabs
         tabs  = [{:name => 'page', :partial => 'wiki/edit_page', :label => :label_wiki_page},
-                 {:name => 'styles', :partial => 'wiki/edit_styles', :label => :label_wiki_styles},
-                 {:name => 'styles_global', :partial => 'wiki/edit_styles', :label => :label_wiki_styles_global, :global => true}
+                 {:name => 'styles', :partial => 'wiki/edit_styles', :label => :label_wiki_styles, :style => @style},
+                 {:name => 'styles_global', :partial => 'wiki/edit_styles', :label => :label_wiki_styles_global, :style => @style_global}
                 ]
       end
     end
