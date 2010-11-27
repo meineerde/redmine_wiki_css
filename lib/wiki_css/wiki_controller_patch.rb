@@ -4,14 +4,14 @@ module WikiCss
   module WikiControllerPatch
     def self.included(base) # :nodoc:
       base.send(:include, InstanceMethods)
-
+      
       base.class_eval do
         unloadable
-      
+        
         helper :wiki
+        before_filter :find_style, :only => [:show, :edit, :update]
         
         alias_method_chain :show, :css
-        alias_method_chain :edit, :css
       end
     end
     
@@ -27,17 +27,12 @@ module WikiCss
           style ? render(:text => style.text, :content_type => 'text/css') : render_404
         else
           show_without_css
-          find_style
         end
       end
       
-      def edit_with_css
-        edit_without_css
-        find_style
-      end
-
-    private          
+    private
       def find_style
+        @page = @wiki.find_or_new_page(params[:id])
         @style = @page.style || WikiStyle.new(:wiki => @wiki, :page => @page)
         @style_global = @wiki.style || WikiStyle.new(:wiki => @wiki)
       end      
