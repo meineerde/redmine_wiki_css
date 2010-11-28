@@ -1,7 +1,7 @@
 = Redmine Wiki CSS plugin
 
 Author:: Holger Just
-URL:: http://dev.holgerjust.de/projects/redmine-wiki-css
+URL:: http://dev.holgerjust.de/projects/redmine-wiki-css/wiki
 
 This plugin to Redmine allows privileged users to use custom CSS in wiki pages.
 
@@ -34,6 +34,6 @@ The installation follows the standard installation path from
 http://www.redmine.org/projects/redmine/wiki/Plugins
 
 1. Copy the software to the vendor/plugins directory. Make sure that the name
-   of the directory is redmine_wiki_css
-2. Run rake db:migrate_plugins RAILS_ENV=production
+   of the directory is +redmine_wiki_css+
+2. Run +rake db:migrate_plugins RAILS_ENV=production+
 3. Restart Redmine
