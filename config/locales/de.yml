@@ -4,4 +4,4 @@ de:
   
   button_save_and_continue: "Speichern und weiter"
   
-  text_need_to_save_wiki_page: 'Die <a href="#">Wiki-Seite</a> muss gespeichert werden, bevor die Styles editiert werden können.'
+  text_need_to_save_wiki_page: Die <a onclick="showTab('page'); this.blur(); return false;" href="?tab=page">Wiki-Seite</a> muss gespeichert werden, bevor die Styles editiert werden können.
