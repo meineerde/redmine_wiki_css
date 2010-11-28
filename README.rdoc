@@ -35,5 +35,5 @@ http://www.redmine.org/projects/redmine/wiki/Plugins
 
 1. Copy the software to the vendor/plugins directory. Make sure that the name
    of the directory is +redmine_wiki_css+
-2. Run +rake db:migrate_plugins RAILS_ENV=production+
+2. Run <tt>rake db:migrate_plugins RAILS_ENV=production</tt>
 3. Restart Redmine
